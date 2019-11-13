@@ -8,5 +8,7 @@ class nuevo_gasto_controller extends Controller
 {
     //
     public function show() {
+        return view('nuevo_gasto_vista');
+  }
 
 }
