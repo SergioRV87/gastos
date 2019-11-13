@@ -11,16 +11,14 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
-        <script> 
 
-        </script>
     </head>
     <body>
         <div class="container-fluid">
             <!--Titulo-->
             <div class="row border-bottom cabecera">
                 <div class="col-12 text-center">
-                    <h1>Gastos</h1>
+                    <h1>Nuevo Gasto</h1>
                 </div>
                 
             </div>
@@ -33,11 +31,7 @@
             <!--Creacion gasto-->
             <div class="row text-center border-bottom border-top cabecera">
                 <div class="col-12 text-right">
-                    <form name="formulario" action="nuevo_gasto_vista" method="GET">
-                        {!! csrf_field(); !!}
-                        <input class="boton" type="submit" id="nuevo" name="nuevo" value="Nuevo Gasto">
-                    </form>
-                    <!--<input class="boton" type="button" name="guardar" id="nuevo" value="Nuevo gasto" onclick="nuevo()">-->
+                    <input class="boton" type="button" name="guardar" id="nuevo" value="Nuevo gasto" onclick="guardar()">
                 </div>
             </div>
             <!--Asignacion de criterios-->
@@ -70,7 +64,10 @@
             </div>
             <div class="row text-left">
                 <div class="col-lg-12 col-md-12">
-                    <input class="boton col-3" type="button" id="guardar" name="guardar" value="Volver" onclick="toIndex()">
+                    <form name="formulario" action="usuario_vista" method="GET">
+                        {!! csrf_field(); !!}
+                        <input class="boton" type="submit" id="nuevo" name="nuevo" value="volver">
+                    </form>
                 </div>
             </div>
         </div>
