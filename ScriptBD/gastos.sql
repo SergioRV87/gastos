@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-11-2019 a las 13:02:16
+-- Tiempo de generación: 21-11-2019 a las 02:45:10
 -- Versión del servidor: 10.1.37-MariaDB
 -- Versión de PHP: 7.2.12
 
@@ -25,6 +25,18 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `c_com_pub`
+--
+
+CREATE TABLE `c_com_pub` (
+  `id_gasto` int(4) NOT NULL,
+  `imagen` varchar(15) NOT NULL,
+  `cuantia` decimal(8,0) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `gastos`
 --
 
@@ -32,9 +44,31 @@ CREATE TABLE `gastos` (
   `id` int(4) NOT NULL,
   `id_usuario` int(3) NOT NULL,
   `descripcion` text NOT NULL,
-  `cuantia` int(9) NOT NULL,
-  `imagen` varchar(4) NOT NULL,
+  `fecha` date NOT NULL,
   `tipo` int(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `grupo_fijo`
+--
+
+CREATE TABLE `grupo_fijo` (
+  `id_grupo` int(4) NOT NULL,
+  `id_usuario` int(4) NOT NULL,
+  `pkm` decimal(8,0) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `grupo_gastos`
+--
+
+CREATE TABLE `grupo_gastos` (
+  `id_grupo` int(4) NOT NULL,
+  `id_gasto` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -48,6 +82,14 @@ CREATE TABLE `tipo_dieta` (
   `denominacion_dieta` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `tipo_dieta`
+--
+
+INSERT INTO `tipo_dieta` (`id`, `denominacion_dieta`) VALUES
+(1, 'Comida'),
+(2, 'Transporte');
+
 -- --------------------------------------------------------
 
 --
@@ -58,6 +100,14 @@ CREATE TABLE `tipo_transporte` (
   `id` int(4) NOT NULL,
   `denominacion_transporte` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `tipo_transporte`
+--
+
+INSERT INTO `tipo_transporte` (`id`, `denominacion_transporte`) VALUES
+(1, 'Publico'),
+(2, 'Personal');
 
 -- --------------------------------------------------------
 
@@ -70,17 +120,13 @@ CREATE TABLE `tipo_usuario` (
   `tipo` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
 --
--- Estructura de tabla para la tabla `transporte`
+-- Volcado de datos para la tabla `tipo_usuario`
 --
 
-CREATE TABLE `transporte` (
-  `id` int(4) NOT NULL,
-  `id_gasto` int(4) NOT NULL,
-  `tipo_transporte` int(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+INSERT INTO `tipo_usuario` (`id`, `tipo`) VALUES
+(1, 'administrador'),
+(2, 'usuario');
 
 -- --------------------------------------------------------
 
@@ -91,8 +137,7 @@ CREATE TABLE `transporte` (
 CREATE TABLE `transporte_personal` (
   `id` int(4) NOT NULL,
   `id_gasto` int(4) NOT NULL,
-  `km` int(4) NOT NULL,
-  `precio_km` decimal(9,0) NOT NULL
+  `km` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -122,12 +167,6 @@ ALTER TABLE `gastos`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `transporte`
---
-ALTER TABLE `transporte`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -141,12 +180,6 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `gastos`
 --
 ALTER TABLE `gastos`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `transporte`
---
-ALTER TABLE `transporte`
   MODIFY `id` int(4) NOT NULL AUTO_INCREMENT;
 
 --
