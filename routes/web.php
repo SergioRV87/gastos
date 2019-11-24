@@ -15,14 +15,20 @@
     return view('welcome');
     
 });*/
-//Route::get('usuario_viata', function () {
-//    return view('usuario_vista');  
-//});
-//
-//
-//Route::get('/', 'usuario_controller@show');
-//
-//bea
+//Rutas de Sergio
+Route::get('usuario_vista', function () {
+    return view('usuario_vista');  
+});
+Route::get('nuevo_gasto_vista', function () {
+    return view('nuevo_gasto_vista');  
+});
+
+Route::get('/', 'usuario_controller@show');
+
+Route::post('nuevo_gasto_vista', 'nuevo_gasto_controller@show');
+
+//Fin rutas de Sergio
+//Rutas de Bea
 Route::get('/' , function () {
    return view('login');
 });
@@ -34,3 +40,4 @@ Route::get('registro', function () {
 });
 Route::post('validar','Controladorbea@login');
 Route::post('nuevoregistro','Controladorbea@registro');
+//Fin rutas de Bea
