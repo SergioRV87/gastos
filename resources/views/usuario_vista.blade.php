@@ -7,13 +7,21 @@
         <script src="js/bootstrap.min.js"></script>
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="css/estilos.css">
+        <script type="text/javascript" src="js/listaGastosUsuario.js" ></script>
         <title>Laravel</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
-        <script> 
-
-        </script>
+        <script>
+        $(function(){
+            //Funcion que carga los articulos a mostrar en la zona de contenido.
+            cargarInicio();
+            //Cargamos el carro de la sesion en caso de que este.
+            cargaSesion();
+            //Esto pinta la zona del carro, que inicialmente estara con 0 articulos.
+            refrescaCarro();
+        });
+    </script> 
     </head>
     <body>
         <div class="container-fluid">
@@ -33,7 +41,7 @@
             <!--Creacion gasto-->
             <div class="row text-center border-bottom border-top cabecera">
                 <div class="col-12 text-right">
-                    <form name="formulario" action="nuevo_gasto_vista" method="GET">
+                    <form name="formulario" action="nuevo_gasto_apertura" method="POST">
                         {!! csrf_field(); !!}
                         <input class="boton" type="submit" id="nuevo" name="nuevo" value="Nuevo Gasto">
                     </form>

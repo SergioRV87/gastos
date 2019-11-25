@@ -26,9 +26,21 @@ Route::get('nuevo_gasto_vista', function () {
 
 Route::get('/', 'usuario_controller@show');
 
-Route::post('nuevo_gasto_vista', 'nuevo_gasto_controller@show');
+Route::post('nuevo_gasto_apertura', 'nuevo_gasto_controller@show');
+
+Route::post('nuevo_gasto_guardado', 'nuevo_gasto_controller@nuevo_gasto_guardado');
 
 //Fin rutas de Sergio
 //Rutas de Bea
-
+Route::get('/' , function () {
+   return view('login');
+});
+Route::get('index', function () {
+   return view('login');
+});
+Route::get('registro', function () {
+   return view('registro');
+});
+Route::post('validar','Controladorbea@login');
+Route::post('nuevoregistro','Controladorbea@registro');
 //Fin rutas de Bea
