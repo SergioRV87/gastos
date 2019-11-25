@@ -15,7 +15,6 @@
     return view('welcome');
     
 });*/
-
 //Rutas de Sergio
 Route::get('usuario_vista', function () {
     return view('usuario_vista');  
