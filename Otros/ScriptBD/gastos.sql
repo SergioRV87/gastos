@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-11-2019 a las 02:45:10
+-- Tiempo de generación: 25-11-2019 a las 20:59:15
 -- Versión del servidor: 10.1.37-MariaDB
 -- Versión de PHP: 7.2.12
 
@@ -30,7 +30,6 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `c_com_pub` (
   `id_gasto` int(4) NOT NULL,
-  `imagen` varchar(15) NOT NULL,
   `cuantia` decimal(8,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -87,8 +86,8 @@ CREATE TABLE `tipo_dieta` (
 --
 
 INSERT INTO `tipo_dieta` (`id`, `denominacion_dieta`) VALUES
-(1, 'Comida'),
-(2, 'Transporte');
+(2, 'Transporte'),
+(1, 'Comida');
 
 -- --------------------------------------------------------
 
@@ -106,8 +105,8 @@ CREATE TABLE `tipo_transporte` (
 --
 
 INSERT INTO `tipo_transporte` (`id`, `denominacion_transporte`) VALUES
-(1, 'Publico'),
-(2, 'Personal');
+(3, 'Publico'),
+(4, 'Personal');
 
 -- --------------------------------------------------------
 
@@ -135,7 +134,6 @@ INSERT INTO `tipo_usuario` (`id`, `tipo`) VALUES
 --
 
 CREATE TABLE `transporte_personal` (
-  `id` int(4) NOT NULL,
   `id_gasto` int(4) NOT NULL,
   `km` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -151,14 +149,20 @@ CREATE TABLE `usuarios` (
   `nombre` varchar(10) NOT NULL,
   `apellidos` varchar(30) NOT NULL,
   `user` varchar(15) NOT NULL,
-  `pass` varchar(15) NOT NULL,
-  `email` varchar(15) NOT NULL,
+  `pass` varchar(100) NOT NULL,
+  `email` varchar(25) NOT NULL,
   `tipo` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `c_com_pub`
+--
+ALTER TABLE `c_com_pub`
+  ADD PRIMARY KEY (`id_gasto`);
 
 --
 -- Indices de la tabla `gastos`
@@ -177,16 +181,10 @@ ALTER TABLE `usuarios`
 --
 
 --
--- AUTO_INCREMENT de la tabla `gastos`
---
-ALTER TABLE `gastos`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
