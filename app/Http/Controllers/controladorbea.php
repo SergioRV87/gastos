@@ -11,7 +11,7 @@ class controladorbea extends Controller {
         $select = \DB::select("SELECT usuarios.id, usuarios.nombre, usuarios.apellidos, usuarios.email, usuarios.user,usuarios.pass, tipo_usuario.tipo FROM usuarios,tipo_usuario "
                         . "where usuarios.user = '" . $req->get('usuario') . "' AND tipo_usuario.id = usuarios.tipo");
         
-        $usr=new Usuario($select[0]->id, $select[0]->user, $select[0]->nombre, $select[0]->apellidos, $select[0]->email, $select[0]->tipo);
+        
          
 //        $datos = [
 //            'id' => $select[0]->id,
@@ -22,6 +22,7 @@ class controladorbea extends Controller {
 //            'tipo' => $select[0]->tipo
 //        ];
         if (password_verify($pass, $select[0]->pass)) {
+            $usr=new Usuario($select[0]->id, $select[0]->user, $select[0]->nombre, $select[0]->apellidos, $select[0]->email, $select[0]->tipo);
             \Session::put('usuario',$usr);
             return view('usuario_vista');
         } else {
