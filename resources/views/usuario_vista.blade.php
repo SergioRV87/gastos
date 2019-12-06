@@ -9,21 +9,89 @@
         <link rel="stylesheet" href="css/estilos.css">
         <script type="text/javascript" src="js/listaGastosUsuario.js" ></script>
         <title>Laravel</title>
-
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
-        <script>
-        $(function(){
-            //Funcion que carga los articulos a mostrar en la zona de contenido.
-            cargarInicio();
-            //Cargamos el carro de la sesion en caso de que este.
-            cargaSesion();
-            //Esto pinta la zona del carro, que inicialmente estara con 0 articulos.
-            refrescaCarro();
-        });
-    </script> 
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css"> 
+        <script src="{{asset('gastos/js/jquery-2.1.4.min.js')}}"></script>
+        <?php 
+        use App\Objetos\Usuario;
+        
+        $idus=null;
+        if(\Session::has('usuario')){
+            $usr=new Usuario("", "", "", "","","");
+            $usr=\Session::get('usuario');
+            $idus= $usr->getId();
+        }
+        ?>
     </head>
     <body>
+        <script>
+            $contenido="";
+            $( document ).ready(function() {
+                cargarInicio();
+            });
+            function cargarInicio()
+            {
+
+                $.ajax({
+                    data:{"usuario":"<?php echo$idus ?>"},
+                    url: 'ajax/cargaGastosUsuario.php',
+                    type: 'post',
+                    success: function (response) {
+                        //Si en response viene la cadena vacio es que no hay nada en la  base de datos.
+                        if(response=="vacio")
+                        {
+                            alert("vacio");
+                            var tabla = '<h1>Sin gastos..</h1>';
+                            document.getElementById("lista").innerHTML= tabla;
+                        }
+                        //Si hay resultados se pintan
+                        else
+                        {
+                            var imprimir = JSON.parse(response);
+                            $contenido=imprimir;
+                            var tabla = '';
+                            for($i=0; $i < imprimir.length; $i++)
+                            {   //id,idus,descripcion,fecha,tipo,cuantia,km
+                                if(imprimir[$i].tipo==1 || imprimir[$i].tipo==3){
+                                    tabla += '<div class="row"><div class="col"><button class="boton form-control" onclick="carga('+imprimir[$i].id+')" > <label>'+imprimir[$i].fecha+'|'+tipo(imprimir[$i].tipo)+'|'+imprimir[$i].cuantia+'€</label></button></div></div>';
+                                }else{
+                                    tabla += '<div class="row"><div class="col"><button class="boton form-control" onclick="carga('+imprimir[$i].id+')" > <label>'+imprimir[$i].fecha+'|'+tipo(imprimir[$i].tipo)+'|'+imprimir[$i].km+'km</label></button></div></div>';
+                                }
+                            }
+                            document.getElementById("lista").innerHTML= tabla;
+                        }
+                    } 
+                });
+            };
+            function carga(id){
+                var tabla="";
+                for($i=0; $i < $contenido.length; $i++){  
+                    if($contenido[$i].id == id){
+                        if($contenido[$i].tipo==1||$contenido[$i].tipo==3){
+                            tabla = '<div class="row"><div class="col-12"><label>Fecha:'+$contenido[$i].fecha+'</label></div></div><div class="row"><div class="col-12"><label>Tipo:'+tipo($contenido[$i].tipo)+'</label></div></div><div class="row"><div class="col-12"><label>Cuantia:'+$contenido[$i].cuantia+'€</label></div></div><div class="row"><div class="col-12"><label>'+$contenido[$i].descripcion+'</label></div></div><div class="row"><div class="col-12"><image src="gimg/-'+$contenido[$i].id+'.jpg"></div></div></div>';
+                        }else{
+                            tabla = '<div class="row"><div class="col-12"><label>Fecha:'+$contenido[$i].fecha+'</label></div></div><div class="row"><div class="col-12"><label>Tipo:'+tipo($contenido[$i].tipo)+'</label></div></div><div class="row"><div class="col-12"><label>KM:'+$contenido[$i].cuantia+'</label></div></div><div class="row"><div class="col-12"><label>'+$contenido[$i].descripcion+'</label></div></div></div>';
+                        }
+                        $i=$contenido.length;
+                    }
+                }
+                document.getElementById("detalle").innerHTML= tabla;
+            
+            };
+            function tipo(tip)
+            {
+                var ret="";
+                switch (tip){
+                    case "1": ret="Comida";
+                        break;
+                    case "3": ret="Tranporte publico";
+                        break;
+                    case "4": ret="Transporte personal";
+                        break;
+                }
+                return ret;
+            }
+        </script>
         <div class="container-fluid">
             <!--Titulo-->
             <div class="row border-bottom cabecera">
@@ -40,10 +108,17 @@
             </div>
             <!--Creacion gasto-->
             <div class="row text-center border-bottom border-top cabecera">
-                <div class="col-12 text-right">
+                <div class="col-6 text-left">
+                    <form name="formulario" action="cierra_sesion" method="POST">
+                        {!! csrf_field(); !!}
+                        <input class="boton form-control" type="submit" id="cs" name="cs" value="Cerrar sesion">
+                    </form>
+                    <!--<input class="boton" type="button" name="guardar" id="nuevo" value="Nuevo gasto" onclick="nuevo()">-->
+                </div>
+                <div class="col-6 text-right">
                     <form name="formulario" action="nuevo_gasto_apertura" method="POST">
                         {!! csrf_field(); !!}
-                        <input class="boton" type="submit" id="nuevo" name="nuevo" value="Nuevo Gasto">
+                        <input class="boton form-control" type="submit" id="nuevo" name="nuevo" value="Nuevo Gasto">
                     </form>
                     <!--<input class="boton" type="button" name="guardar" id="nuevo" value="Nuevo gasto" onclick="nuevo()">-->
                 </div>
@@ -56,8 +131,8 @@
                         <div class="menu">
                             <li class="itemm" id='ctrs'>
                             <a href="#profile" class="btn"><i class="far fa-user"></i>Lista</a>
-                                <div id="criterios" name="criterios" class="smenuu" ondrop="drop(this, event)" ondragenter="return false" ondragover="return false">
-                                    <!--Contenido a arrastrar-->
+                                <div id="lista" name="lista" class="smenuu">
+                                    <h1>Cargando....</h1>
                                 </div>
                             </li>
                         </div>
@@ -68,17 +143,12 @@
                         <div class="menu">
                             <li class="itemm" id='ctrs'>
                             <a href="#profile" class="btn"><i class="far fa-user"></i>Detalle</a>
-                                <div id="criterios" name="criterios" class="smenuu" ondrop="drop(this, event)" ondragenter="return false" ondragover="return false">
-                                    <!--Contenido a arrastrar-->
+                                <div id="detalle" name="detalle" class="smenuu">
+                                    <label>Selecciona un gasto para verlo en detalle</label>
                                 </div>
                             </li>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="row text-left">
-                <div class="col-lg-12 col-md-12">
-                    <input class="boton col-3" type="button" id="guardar" name="guardar" value="Volver" onclick="toIndex()">
                 </div>
             </div>
         </div>

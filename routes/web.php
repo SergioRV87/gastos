@@ -23,12 +23,13 @@ Route::get('nuevo_gasto_vista', function () {
     return view('nuevo_gasto_vista');  
 });
 
-Route::get('/', 'usuario_controller@show');
+//Route::get('/', 'usuario_controller@show');
 
 Route::post('nuevo_gasto_apertura', 'nuevo_gasto_controller@show');
 
 Route::post('nuevo_gasto_guardado', 'nuevo_gasto_controller@nuevo_gasto_guardado');
 
+Route::post('cierra_sesion', 'usuario_controller@logoff');
 //Fin rutas de Sergio
 //Rutas de Bea
 //Route::get('/' , function () {
