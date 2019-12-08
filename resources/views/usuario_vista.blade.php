@@ -16,12 +16,10 @@
         use App\Objetos\Usuario;
         
         $idus=null;
-        $tus=null;
         if(\Session::has('usuario')){
             $usr=new Usuario("", "", "", "","","");
             $usr=\Session::get('usuario');
             $idus= $usr->getId();
-            $tus= $usr->getRol();
         }
         ?>
     </head>
@@ -33,6 +31,7 @@
             });
             function cargarInicio()
             {
+
                 $.ajax({
                     data:{"usuario":"<?php echo$idus ?>"},
                     url: 'ajax/cargaGastosUsuario.php',
@@ -41,6 +40,7 @@
                         //Si en response viene la cadena vacio es que no hay nada en la  base de datos.
                         if(response=="vacio")
                         {
+                            alert("vacio");
                             var tabla = '<h1>Sin gastos..</h1>';
                             document.getElementById("lista").innerHTML= tabla;
                         }
@@ -76,6 +76,7 @@
                     }
                 }
                 document.getElementById("detalle").innerHTML= tabla;
+            
             };
             function tipo(tip)
             {
@@ -107,25 +108,19 @@
             </div>
             <!--Creacion gasto-->
             <div class="row text-center border-bottom border-top cabecera">
-                <div <?php if ($tus=="administrador"){ echo 'class="col-4 text-left"'; } else {echo 'class="col-6 text-left"';} ?> >
+                <div class="col-6 text-left">
                     <form name="formulario" action="cierra_sesion" method="POST">
                         {!! csrf_field(); !!}
                         <input class="boton form-control" type="submit" id="cs" name="cs" value="Cerrar sesion">
                     </form>
+                    <!--<input class="boton" type="button" name="guardar" id="nuevo" value="Nuevo gasto" onclick="nuevo()">-->
                 </div>
-                <?php if ($tus=="administrador"){ ?> 
-                <div class="col-4 text-left">
-                    <form name="formulario" action="administracion_vista" method="POST">
-                        {!! csrf_field(); !!}
-                        <input class="boton form-control" type="submit" id="adminbtn" name="adminbtn" value="Administracion">
-                    </form>              
-                </div>    
-                <?php } ?>
-                <div <?php if ($tus=="administrador"){ echo 'class="col-4 text-left"'; } else {echo 'class="col-6 text-left"';} ?> >
+                <div class="col-6 text-right">
                     <form name="formulario" action="nuevo_gasto_apertura" method="POST">
                         {!! csrf_field(); !!}
                         <input class="boton form-control" type="submit" id="nuevo" name="nuevo" value="Nuevo Gasto">
-                    </form>              
+                    </form>
+                    <!--<input class="boton" type="button" name="guardar" id="nuevo" value="Nuevo gasto" onclick="nuevo()">-->
                 </div>
             </div>
             <!--Asignacion de criterios-->

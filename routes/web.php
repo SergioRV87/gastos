@@ -22,12 +22,8 @@ Route::get('usuario_vista', function () {
 Route::get('nuevo_gasto_vista', function () {
     return view('nuevo_gasto_vista');  
 });
-Route::get('administracion_vista', function () {
-    return view('administracion_vista');  
-});
-//Route::get('/', 'usuario_controller@show');
 
-Route::post('administracion_vista', 'administracion_controller@show');
+//Route::get('/', 'usuario_controller@show');
 
 Route::post('nuevo_gasto_apertura', 'nuevo_gasto_controller@show');
 
