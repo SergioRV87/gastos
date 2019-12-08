@@ -10,9 +10,7 @@ class controladorbea extends Controller {
         $pass = $req->get('pass');
         $select = \DB::select("SELECT usuarios.id, usuarios.nombre, usuarios.apellidos, usuarios.email, usuarios.user,usuarios.pass, tipo_usuario.tipo FROM usuarios,tipo_usuario "
                         . "where usuarios.user = '" . $req->get('usuario') . "' AND tipo_usuario.id = usuarios.tipo");
-        
-        
-         
+
 //        $datos = [
 //            'id' => $select[0]->id,
 //            'nombre' => $select[0]->nombre,
@@ -39,7 +37,7 @@ class controladorbea extends Controller {
         $pass_cifrado = password_hash($pass, PASSWORD_DEFAULT);
         $resultado = \DB::Insert('INSERT INTO usuarios (id, nombre, apellidos, email, user, pass, tipo) '
                         . 'VALUES (DEFAULT, "' . $nombre . '", "' . $apellidos . '", "' . $email . '", "' . $user . '", "' . $pass_cifrado . '", 2)');
-        return view('index');
+        return view('login');
     }
 
 }
