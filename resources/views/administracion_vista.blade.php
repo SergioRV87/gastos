@@ -17,6 +17,7 @@
         
         $idus=null;
         $tus=null;
+        $ptotal=0;
         if(\Session::has('usuario')){
             $usr=new Usuario("", "", "", "","","");
             $usr=\Session::get('usuario');
@@ -28,6 +29,7 @@
     <body>
         <script>
             $contenido="";
+            $contenidoGp="";
             $( document ).ready(function() {
                 //cargarInicio();
                 cargaSelectGastos();
@@ -57,9 +59,9 @@
                             for($i=0; $i < imprimir.length; $i++)
                             {   //id,idus,descripcion,fecha,tipo,cuantia,km
                                 if(imprimir[$i].tipo==1 || imprimir[$i].tipo==3){
-                                    tabla += '<div class="row"><div class="col"><button class="boton form-control" onclick="carga('+imprimir[$i].id+')" > <label>'+imprimir[$i].fecha+'|'+tipo(imprimir[$i].tipo)+'|'+imprimir[$i].cuantia+'€</label></button></div></div>';
+                                    tabla += '<div class="row"><div class="col-12"><button class="boton form-control" onclick="carga('+imprimir[$i].id+')" > <label>'+imprimir[$i].fecha+'|'+tipo(imprimir[$i].tipo)+'|'+imprimir[$i].cuantia+'€</label></button></div></div>';
                                 }else{
-                                    tabla += '<div class="row"><div class="col"><button class="boton form-control" onclick="carga('+imprimir[$i].id+')" > <label>'+imprimir[$i].fecha+'|'+tipo(imprimir[$i].tipo)+'|'+imprimir[$i].km+'km</label></button></div></div>';
+                                    tabla += '<div class="row"><div class="col-12"><button class="boton form-control" onclick="carga('+imprimir[$i].id+')" > <label>'+imprimir[$i].fecha+'|'+tipo(imprimir[$i].tipo)+'|'+imprimir[$i].km+'km</label></button></div></div>';
                                 }
                             }
                             document.getElementById("lista").innerHTML= tabla;
@@ -78,9 +80,9 @@
                 for($i=0; $i < $contenido.length; $i++){  
                     if($contenido[$i].id == id){
                         if($contenido[$i].tipo==1||$contenido[$i].tipo==3){
-                            tabla = '<div class="row"><div class="col-12"><label>Fecha:'+$contenido[$i].fecha+'</label></div></div><div class="row"><div class="col-12"><label>Tipo:'+tipo($contenido[$i].tipo)+'</label></div></div><div class="row"><div class="col-12"><label>Cuantia:'+$contenido[$i].cuantia+'€</label></div></div><div class="row"><div class="col-12"><label>Descripcion:'+$contenido[$i].descripcion+'</label></div></div><div class="row"><div class="col-12"><image src="gimg/-'+$contenido[$i].id+'.jpg"></div></div></div>';
+                            tabla = '<div class="row"><div class="col-12"><label>Fecha:'+$contenido[$i].fecha+'</label></div></div><div class="row"><div class="col-12"><label>Tipo:'+tipo($contenido[$i].tipo)+'</label></div></div><div class="row"><div class="col-12"><label>Cuantia:'+$contenido[$i].cuantia+'€</label></div></div><div class="row"><div class="col-12"><button class="boton form-control" onclick="aniadeAGp('+$contenido[$i].id+')"><label>Añadir a grupo.</label></button></div></div><div class="row"><div class="col-12"><label>Descripcion:'+$contenido[$i].descripcion+'</label></div></div><div class="row"><div class="col-12"><image src="gimg/-'+$contenido[$i].id+'.jpg"></div></div></div>';
                         }else{
-                            tabla = '<div class="row"><div class="col-12"><label>Fecha:'+$contenido[$i].fecha+'</label></div></div><div class="row"><div class="col-12"><label>Tipo:'+tipo($contenido[$i].tipo)+'</label></div></div><div class="row"><div class="col-12"><label>KM:'+$contenido[$i].cuantia+'</label></div></div><div class="row"><div class="col-12"><label>Descripcion:'+$contenido[$i].descripcion+'</label></div></div></div>';
+                            tabla = '<div class="row"><div class="col-12"><label>Fecha:'+$contenido[$i].fecha+'</label></div></div><div class="row"><div class="col-12"><label>Tipo:'+tipo($contenido[$i].tipo)+'</label></div></div><div class="row"><div class="col-12"><label>KM:'+$contenido[$i].cuantia+'</label></div></div><div class="row"><div class="col-12"><button class="boton form-control" onclick="aniadeAGp('+$contenido[$i].id+')"><label>Añadir a grupo.</label></button></div></div><div class="row"><div class="col-12"><label>Descripcion:'+$contenido[$i].descripcion+'</label></div></div></div>';
                         }
                         $i=$contenido.length;
                     }
@@ -147,43 +149,104 @@
             }
             function cargarGrupo(){
                 $idussel=document.getElementById("selgp").value;
+                $ptotal=0;
                 if($idussel!=-1){
                     $.ajax({
-                    data:{"usuario":$idussel},
-                    url: 'ajax/cargaGrupo.php',
+                        data:{"usuario":$idussel},
+                        url: 'ajax/cargaGrupo.php',
+                        type: 'post',
+                        success: function (response) {
+                            //Si en response viene la cadena vacio es que no hay nada en la  base de datos.
+                            if(response=="vacio")
+                            {
+                                var tabla = '<h1>Sin gastos..</h1>';
+                                document.getElementById("listaGp").innerHTML= tabla;
+                                document.getElementById("detalleGp").innerHTML= "<h1>Seleccione un gasto de usuario...</h1>";
+                            }
+                            //Si hay resultados se pintan
+                            else
+                            {
+
+                                var imprimir = JSON.parse(response);
+                                $contenidoGp=imprimir;
+                                var tabla = '';
+                                for($i=0; $i < imprimir.length; $i++)
+                                {   //id,idus,descripcion,fecha,tipo,cuantia,km
+                                    if(imprimir[$i].tipo==1 || imprimir[$i].tipo==3){
+                                        $ptotal+= parseInt(imprimir[$i].cuantia);
+                                        tabla += '<div class="row"><div class="col"><button class="boton form-control" onclick="cargaGGp('+imprimir[$i].id+')" > <label>'+imprimir[$i].user+'|'+imprimir[$i].fecha+'|'+tipo(imprimir[$i].tipo)+'|'+imprimir[$i].cuantia+'€</label></button></div></div>';
+                                    }else{
+                                        $ptotal+=parseInt(imprimir[$i].km)*parseInt(imprimir[$i].pkm);
+                                        tabla += '<div class="row"><div class="col"><button class="boton form-control" onclick="cargaGGp('+imprimir[$i].id+')" > <label>'+imprimir[$i].user+'|'+imprimir[$i].fecha+'|'+tipo(imprimir[$i].tipo)+'|'+imprimir[$i].km+'km</label></button></div></div>';
+                                    }
+                                }
+                                
+                                document.getElementById("lbllistagp").innerHTML= "Coste total: " + $ptotal + "€";
+                                document.getElementById("listaGp").innerHTML= tabla;
+                            }
+                        } 
+                    });
+                }else{
+
+                    var tabla = '<h1>Sin gastos...</h1>';
+                    document.getElementById("listaGp").innerHTML= tabla;
+                    document.getElementById("detalleGp").innerHTML= "<h1>Seleccione un gasto de usuario...</h1>";
+                }
+            }
+            function aniadeAGp(id){
+                
+                $idg = id;
+                $gp = document.getElementById("selgp").value;
+                if($gp!="-1" && $gp!=null){
+                    
+                    $.ajax({
+                        data:{"idgasto":$idg,"idgp":$gp},
+                        url: 'ajax/aniadeAGrupo.php',
+                        type: 'post',
+                        success: function (response) {
+                            //Si en response viene la cadena vacio es que no hay nada en la  base de datos.
+                            if(response=="ok")
+                            {
+                                cargarGrupo();
+                            }
+                        } 
+                    });
+        
+                } else {
+                    alert("Seleccione primero un grupo y luego pulse en añadir sobre el gasto.");
+                }
+            }
+            function cargaGGp(id){
+                var tabla="";
+                for($i=0; $i < $contenidoGp.length; $i++){  
+                    if($contenidoGp[$i].id == id){
+                        if($contenidoGp[$i].tipo==1||$contenidoGp[$i].tipo==3){
+                            tabla = '<div class="row"><div class="col-12"><label>Fecha:'+$contenidoGp[$i].fecha+'</label></div></div><div class="row"><div class="col-12"><label>Tipo:'+tipo($contenidoGp[$i].tipo)+'</label></div></div><div class="row"><div class="col-12"><label>Cuantia:'+$contenidoGp[$i].cuantia+'€</label></div></div><div class="row"><div class="col-12"><button class="boton form-control" onclick="borraDeGp('+$contenidoGp[$i].id+','+$contenidoGp[$i].idg+')"><label>Quitar de grupo.</label></button></div></div><div class="row"><div class="col-12"><label>Descripcion:'+$contenidoGp[$i].descripcion+'</label></div></div><div class="row"><div class="col-12"><image src="gimg/-'+$contenidoGp[$i].id+'.jpg"></div></div></div>';
+                        }else{
+                            tabla = '<div class="row"><div class="col-12"><label>Fecha:'+$contenidoGp[$i].fecha+'</label></div></div><div class="row"><div class="col-12"><label>Tipo:'+tipo($contenidoGp[$i].tipo)+'</label></div></div><div class="row"><div class="col-12"><label>KM:'+$contenidoGp[$i].cuantia+'</label></div></div><div class="row"><div class="col-12"><button class="boton form-control" onclick="borraDeGp('+$contenidoGp[$i].id+','+$contenidoGp[$i].idg+')"><label>Quitar de grupo.</label></button></div></div><div class="row"><div class="col-12"><label>Descripcion:'+$contenidoGp[$i].descripcion+'</label></div></div></div>';
+                        }
+                        $i=$contenidoGp.length;
+                    }
+                }
+                document.getElementById("detalleGp").innerHTML= tabla;
+            };
+            function borraDeGp(idga,idgr){
+                $idga = idga;
+                $idgr = idgr;
+                $.ajax({
+                    data:{"idgasto":$idga,"idgrupo":$idgr},
+                    url: 'ajax/borraDeGP.php',
                     type: 'post',
                     success: function (response) {
                         //Si en response viene la cadena vacio es que no hay nada en la  base de datos.
-                        if(response=="vacio")
+                        if(response=="ok")
                         {
-                            var tabla = '<h1>Sin gastos..</h1>';
-                            document.getElementById("lista").innerHTML= tabla;
-                            document.getElementById("detalle").innerHTML= "<h1>Seleccione un gasto de usuario...</h1>";
-                        }
-                        //Si hay resultados se pintan
-                        else
-                        {
-                            var imprimir = JSON.parse(response);
-                            $contenido=imprimir;
-                            var tabla = '';
-                            for($i=0; $i < imprimir.length; $i++)
-                            {   //id,idus,descripcion,fecha,tipo,cuantia,km
-                                if(imprimir[$i].tipo==1 || imprimir[$i].tipo==3){
-                                    tabla += '<div class="row"><div class="col"><button class="boton form-control" onclick="carga('+imprimir[$i].id+')" > <label>'+imprimir[$i].fecha+'|'+tipo(imprimir[$i].tipo)+'|'+imprimir[$i].cuantia+'€</label></button></div></div>';
-                                }else{
-                                    tabla += '<div class="row"><div class="col"><button class="boton form-control" onclick="carga('+imprimir[$i].id+')" > <label>'+imprimir[$i].fecha+'|'+tipo(imprimir[$i].tipo)+'|'+imprimir[$i].km+'km</label></button></div></div>';
-                                }
-                            }
-                            document.getElementById("lista").innerHTML= tabla;
+                            cargarGrupo();
+                            document.getElementById("detalleGp").innerHTML= "<h1>Seleccione un gasto de usuario...</h1>";
                         }
                     } 
                 });
-                }else{
-                    var tabla = '<h1>Sin gastos...</h1>';
-                    document.getElementById("lista").innerHTML= tabla;
-                    document.getElementById("detalle").innerHTML= "<h1>Seleccione un gasto de usuario...</h1>";
-                }
-            }
+            };
         </script>
         <div class="container-fluid">
             <!--Titulo-->
@@ -280,8 +343,8 @@
                     <div class="middle">
                         <div class="menu">
                             <li class="itemm" id='ctrs'>
-                            <a href="#profile" class="btn"><i class="far fa-user"></i>Lista de gastos del usuario</a>
-                                <div id="lista" name="lista" class="smenuu">
+                            <a href="#profile" class="btn"><i class="far fa-user" id="lbllistagp"></i>Lista de gastos del grupo</a>
+                                <div id="listaGp" name="listaGp" class="smenuu">
                                     <h1>Cargando....</h1>
                                 </div>
                             </li>
@@ -292,8 +355,8 @@
                     <div class="middle">
                         <div class="menu">
                             <li class="itemm" id='ctrs'>
-                            <a href="#profile" class="btn"><i class="far fa-user"></i>Detalle del gasto del usuario</a>
-                                <div id="detalle" name="detalle" class="smenuu">
+                            <a href="#profile" class="btn"><i class="far fa-user" ></i>Detalle del gasto del usuario</a>
+                                <div id="detalleGp" name="detalleGp" class="smenuu">
                                     <label>Selecciona un gasto para verlo en detalle</label>
                                 </div>
                             </li>

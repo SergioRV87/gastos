@@ -36,16 +36,15 @@ Route::post('nuevo_gasto_guardado', 'nuevo_gasto_controller@nuevo_gasto_guardado
 Route::post('cierra_sesion', 'usuario_controller@logoff');
 //Fin rutas de Sergio
 //Rutas de Bea
-Route::get('/' , function () {
-   return view('login');
-});
+//Route::get('/' , function () {
+//   return view('login');
+//});
 Route::get('index', function () {
    return view('login');
 });
-
-Route::get('registro', function () {
+Route::get('nuevoregistro', function () {
    return view('registro');
 });
-Route::post('validar','Controladorbea@login');
-Route::post('nuevoregistro','Controladorbea@registro');
+Route::post('login','controladorbea@login');
+Route::post('registro','controladorbea@registro');
 //Fin rutas de Bea
