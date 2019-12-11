@@ -4,7 +4,12 @@ $(document).ready(function () {
         var user = $('#user').val();
         var pass = $('#pass').val();
         if (user !== user.trim() || pass !== pass.trim()) {
-            alert('Por favor revisa los datos !');
+            $('#contenido p').remove();
+            $('#contenido').append('<p>¡Por favor revisa los espacios!</p>');
+            $('#myModalWarning').modal('show');
+            setTimeout(function () {
+                $('#myModalWarning').modal('hide');
+            }, 2000);
         } else {
             $.ajax({
                 headers: {
@@ -21,11 +26,12 @@ $(document).ready(function () {
                     if (response === 'correcto') {
                         window.location = "usuario_vista";
                     } else {
-                        if (response === 'passIncorrecta') {
-                            alert("contraseña incorrecta");
-                        } else {
-                            alert("no esta usted registrado");
-                        }
+                        $('#contenido p').remove();
+                        $('#contenido').append('<p>' + response + '</p>');
+                        $('#myModalWarning').modal('show');
+                        setTimeout(function () {
+                            $('#myModalWarning').modal('hide');
+                        }, 2000);
                     }
                 },
                 statusCode: {
