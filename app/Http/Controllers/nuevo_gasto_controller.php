@@ -20,7 +20,6 @@ class nuevo_gasto_controller extends Controller
             ];
         return view('nuevo_gasto_vista',$datos);
     }
-  
     public function nuevo_gasto_guardado(Request $req){
     
         if(\Session::has('usuario')){
@@ -33,7 +32,6 @@ class nuevo_gasto_controller extends Controller
             $email= $usr->getEmail();
             $rol= $usr->getRol();
         }
-        
         $td=$req->get('id_tipo_dieta');
         $tt=$req->get('id_tipo_transporte');
         $km=$req->get('km');
@@ -42,7 +40,6 @@ class nuevo_gasto_controller extends Controller
         $descripcion=$req->get('descripcion');
         $msg="";
         $corr=false;
-        
         if($descripcion==null)
         {
             $descripcion="";
@@ -73,7 +70,6 @@ class nuevo_gasto_controller extends Controller
                 }
             }
         }
-        
         //Si el gasto se a guardado en base de datos correctamente se sube la imagen
         if($corr)
         {
@@ -95,7 +91,5 @@ class nuevo_gasto_controller extends Controller
             $msg='Usuario registrado.';
         }
         return view('usuario_vista');
-        
     }
-
 }

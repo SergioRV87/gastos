@@ -1,17 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
-    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/xampp/htdocs/gastos/routes/web.php</file>
-            <file>file:/C:/xampp/htdocs/gastos/resources/views/nuevo_gasto_vista.blade.php</file>
-            <file>file:/C:/xampp/htdocs/gastos/app/Objetos/Usuario.php</file>
-            <file>file:/C:/xampp/htdocs/gastos/public/js/validacionLogin.js</file>
-            <file>file:/C:/xampp/htdocs/gastos/resources/views/login.blade.php</file>
-            <file>file:/C:/xampp/htdocs/gastos/public/js/validacionRegistro.js</file>
-            <file>file:/C:/xampp/htdocs/gastos/resources/views/registro.blade.php</file>
-            <file>file:/C:/xampp/htdocs/gastos/resources/views/usuario_vista.blade.php</file>
-            <file>file:/C:/xampp/htdocs/gastos/app/Http/Controllers/controladorbea.php</file>
-        </group>
-    </open-files>
+
+-<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+
+<editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+
+
+-<open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+
+
+-<group>
+
+<file>file:/C:/xampp/htdocs/gastos/app/Http/Controllers/nuevo_gasto_controller.php</file>
+
+<file>file:/C:/xampp/htdocs/gastos/routes/web.php</file>
+
+<file>file:/C:/xampp/htdocs/gastos/public/ajax/cargaGastosUsuario.php</file>
+
+<file>file:/C:/xampp/htdocs/gastos/app/Http/Controllers/usuario_controller.php</file>
+
+<file>file:/C:/xampp/htdocs/gastos/resources/views/usuario_vista.blade.php</file>
+
+<file>file:/C:/xampp/htdocs/gastos/app/Http/Controllers/controladorbea.php</file>
+
+</group>
+
+</open-files>
+
 </project-private>
