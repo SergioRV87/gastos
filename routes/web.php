@@ -39,7 +39,7 @@ Route::post('cierra_sesion', 'usuario_controller@logoff');
 //Route::get('/' , function () {
 //   return view('login');
 //});
-Route::get('index', function () {
+Route::get('/', function () {
    return view('login');
 });
 Route::get('nuevoregistro', function () {

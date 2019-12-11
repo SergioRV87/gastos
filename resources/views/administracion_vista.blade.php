@@ -264,24 +264,16 @@
             </div>
             <!--Creacion gasto-->
             <div class="row text-center border-bottom border-top cabecera">
-                <div <?php if ($tus=="administrador"){ echo 'class="col-4 text-left"'; } else {echo 'class="col-6 text-left"';} ?> >
+                <div class="col-lg-6 col-md-12 col-sm-12 text-left">
                     <form name="formulario" action="cierra_sesion" method="POST">
                         {!! csrf_field(); !!}
                         <input class="boton form-control" type="submit" id="cs" name="cs" value="Cerrar sesion">
                     </form>
                 </div>
-                <?php if ($tus=="administrador"){ ?> 
-                <div class="col-4 text-left">
-                    <form name="formulario" action="administracion" method="POST">
+                <div class="col-lg-6 col-md-12 col-sm-12 text-left">
+                    <form name="formulario" action="usuario_vista" method="GET">
                         {!! csrf_field(); !!}
-                        <input class="boton form-control" type="submit" id="adminbtn" name="adminbtn" value="Administracion">
-                    </form>              
-                </div>    
-                <?php } ?>
-                <div <?php if ($tus=="administrador"){ echo 'class="col-4 text-left"'; } else {echo 'class="col-6 text-left"';} ?> >
-                    <form name="formulario" action="nuevo_gasto_apertura" method="POST">
-                        {!! csrf_field(); !!}
-                        <input class="boton form-control" type="submit" id="nuevo" name="nuevo" value="Nuevo Gasto">
+                        <input class="boton form-control" type="submit" id="usrv" name="usrv" value="Vista usuario">
                     </form>              
                 </div>
             </div>
