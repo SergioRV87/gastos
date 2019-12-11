@@ -32,9 +32,9 @@ Route::post('nuevo_gasto_guardado', 'nuevo_gasto_controller@nuevo_gasto_guardado
 Route::post('cierra_sesion', 'usuario_controller@logoff');
 //Fin rutas de Sergio
 //Rutas de Bea
-//Route::get('/' , function () {
-//   return view('login');
-//});
+Route::get('/' , function () {
+   return view('login');
+});
 Route::get('index', function () {
    return view('login');
 });

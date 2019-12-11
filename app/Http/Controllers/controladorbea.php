@@ -19,10 +19,10 @@ class controladorbea extends Controller {
                 \Session::put('usuario', $usr);
                 $respuesta = 'correcto';
             } else {
-                $respuesta = 'passIncorrecta';
+                $respuesta = 'Contraseña incorrecta';
             }
         } else {
-            $respuesta = 'noExiste';
+            $respuesta = 'Usted no esta registrado';
         }
 
         echo $respuesta;

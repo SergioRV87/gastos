@@ -7,7 +7,12 @@ $(document).ready(function () {
         var pass = $('#pass').val();
         var email = $('#email').val();
         if (nombre !== nombre.trim() || apellidos !== apellidos.trim() || user !== user.trim() || pass !== pass.trim() || email !== email.trim()) {
-            alert('Por favor revisa los datos !');
+            $('#contenido p').remove();
+            $('#contenido').append('<p>¡Por favor revisa los espacios!</p>');
+            $('#myModalWarning').modal('show');
+            setTimeout(function () {
+                $('#myModalWarning').modal('hide');
+            }, 2000);
         } else {
             $.ajax({
                 url: "registro",
