@@ -7,7 +7,7 @@ and open the template in the editor.
     Author     : SergioRV
 */
 
-*{
+/**{
   margin: 0;
   padding: 0;
   font-family: sans-serif;
@@ -27,17 +27,17 @@ and open the template in the editor.
     height: auto;
 }
 
-/*.rowoscuro{
+.rowoscuro{
     border-radius: 8px;
     overflow: hidden;
     background: #333;
     color: white;
-}*/
+}
 
 .middle{
   top: 50%;
   left: 50%;
-  /*transform: translate(-50%,-50%);*/
+  transform: translate(-50%,-50%);
 }
 .menu{
   width: 90%;
@@ -162,7 +162,7 @@ and open the template in the editor.
     -webkit-box-shadow: 13px 13px 24px -9px rgba(0,0,0,1);
     -moz-box-shadow: 13px 13px 24px -9px rgba(0,0,0,1);
     box-shadow: 13px 13px 24px -9px rgba(0,0,0,1);
-}
+}*/
 .cajaIndex{
     -webkit-box-shadow: 13px 14px 15px 2px rgba(0,0,0,0.62);
     -moz-box-shadow: 13px 14px 15px 2px rgba(0,0,0,0.62);
