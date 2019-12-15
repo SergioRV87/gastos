@@ -26,7 +26,6 @@ $(document).ready(function () {
                     pass: pass,
                     email: email
                 },
-                cache: false,
                 success: function (response) {
                     if (response === 'correcto') {
                         $('#myModal').modal('show');
@@ -34,7 +33,7 @@ $(document).ready(function () {
                             $('#myModal').modal('hide');
                         }, 3000);
                         setTimeout(function () {
-                            window.location = "index";
+                            window.location = "usuario_vista";
                         }, 1000);
 
                     } else {

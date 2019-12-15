@@ -21,7 +21,6 @@ $(document).ready(function () {
                     user: user,
                     pass: pass
                 },
-                cache: false,
                 success: function (response) {
                     if (response === 'correcto') {
                         window.location = "usuario_vista";
