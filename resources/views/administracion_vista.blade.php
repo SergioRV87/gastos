@@ -11,7 +11,7 @@
         <!--<link rel="stylesheet" href="css/estilos.css">-->
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css"> 
-        
+
         <?php
 
         use App\Objetos\Usuario;
@@ -156,12 +156,20 @@ $idus = null;
                             if (response === "insertado")
                             {
                                 cargaSelectGastos();
-                                alert("Grupo de gastos añadido");
+                                $('#myModal').modal('show');
+                                setTimeout(function () {
+                                    $('#myModal').modal('hide');
+                                }, 3000);
                             }
                         }
                     });
                 } else {
-                    alert("Rellene la denominacion y el precio por kilometro para crear un nuevo grupo");
+                 $('#contenido p').remove();
+                        $('#contenido').append('<p>Rellene la denominacion y el precio por kilometro para crear un nuevo grupo</p>');
+                        $('#myModalWarning').modal('show');
+                        setTimeout(function () {
+                            $('#myModalWarning').modal('hide');
+                        }, 2000);
                 }
             }
             function cargarGrupo() {
@@ -230,7 +238,12 @@ $idus = null;
                     });
 
                 } else {
-                    alert("Seleccione primero un grupo y luego pulse en añadir sobre el gasto.");
+                     $('#contenido p').remove();
+                        $('#contenido').append('<p>Seleccione primero un grupo y luego pulse en añadir sobre el gasto</p>');
+                        $('#myModalWarning').modal('show');
+                        setTimeout(function () {
+                            $('#myModalWarning').modal('hide');
+                        }, 2000);
                 }
             }
             function cargaGGp(id) {
@@ -323,9 +336,9 @@ $idus = null;
                 </div>
                 <div id="accordion1" class="mt-4">
                     <div class="card">
-                        <div class="card-header" id="headingOne">
+                        <div class="card-header badge-dark" id="headingOne">
                             <h5 class="mb-0">
-                                <button class="btn btn-toolbar collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <button class="btn btn-toolbar collapsed badge-dark" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                     Usuarios
                                 </button>
                             </h5>
@@ -387,9 +400,9 @@ $idus = null;
                 </div>
                 <div id="accordion2" class="mb-4">
                     <div class="card">
-                        <div class="card-header" id="headingTwo">
+                        <div class="card-header badge-dark" id="headingTwo">
                             <h5 class="mb-0">
-                                <button class="btn btn-toolbar collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                <button class="btn btn-toolbar collapsed badge-dark" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                     Grupos de gasto
                                 </button>
                             </h5>
@@ -439,5 +452,35 @@ $idus = null;
             </div>
         </div>
         <div>@include('footer')</div>
+        <!-- The Modal -->
+        <div class="modal" id="myModalWarning">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header badge-warning">
+                        <h4 class="modal-title">Cuidado</h4>
+                    </div>
+                    <!-- Modal body -->
+                    <div id="contenido" class="modal-body badge-warning">
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- The Modal -->
+        <div class="modal" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header badge-success">
+                        <h4 class="modal-title">Correcto</h4>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="modal-body badge-success">
+                        <p>Grupo de gastos añadido</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
 </html>
