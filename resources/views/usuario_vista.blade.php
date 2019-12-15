@@ -102,20 +102,22 @@ $idus = null;
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <?php if ($tus == "administrador") { ?>
+                <?php if ($tus == "administrador") { ?>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item active">
                                 <a class="nav-link" href="administracion_vista">Administración<span class="sr-only">(current)</span></a>
                             </li>
                         </ul>
+                    <?php } else {
+                        ?><div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                     <?php } ?>
-                    <ul class="navbar-nav mr-1">
-                        <li class="nav-item active">
-                            <a class="nav-link btn badge-danger" href="cierra_sesion">Salir<span class="sr-only">(current)</span></a>
-                        </li>
-                    </ul>
-                </div>
+                        <ul class="navbar-nav">
+                            <li class="nav-item active">
+                                <a class="nav-link btn badge-danger" href="cierra_sesion">Salir<span class="sr-only">(current)</span></a>
+                            </li>
+                        </ul>
+                    </div>
             </nav>
             <div class="row m-1 badge-light">
                 <div class="col-12 border-dark border-top border-bottom border-right border-left text-center">
