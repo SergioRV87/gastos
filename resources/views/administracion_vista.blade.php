@@ -164,12 +164,12 @@ $idus = null;
                         }
                     });
                 } else {
-                 $('#contenido p').remove();
-                        $('#contenido').append('<p>Rellene la denominacion y el precio por kilometro para crear un nuevo grupo</p>');
-                        $('#myModalWarning').modal('show');
-                        setTimeout(function () {
-                            $('#myModalWarning').modal('hide');
-                        }, 2000);
+                    $('#contenido p').remove();
+                    $('#contenido').append('<p>Rellene la denominacion y el precio por kilometro para crear un nuevo grupo</p>');
+                    $('#myModalWarning').modal('show');
+                    setTimeout(function () {
+                        $('#myModalWarning').modal('hide');
+                    }, 2000);
                 }
             }
             function cargarGrupo() {
@@ -238,12 +238,12 @@ $idus = null;
                     });
 
                 } else {
-                     $('#contenido p').remove();
-                        $('#contenido').append('<p>Seleccione primero un grupo y luego pulse en añadir sobre el gasto</p>');
-                        $('#myModalWarning').modal('show');
-                        setTimeout(function () {
-                            $('#myModalWarning').modal('hide');
-                        }, 2000);
+                    $('#contenido p').remove();
+                    $('#contenido').append('<p>Seleccione primero un grupo y luego pulse en añadir sobre el gasto</p>');
+                    $('#myModalWarning').modal('show');
+                    setTimeout(function () {
+                        $('#myModalWarning').modal('hide');
+                    }, 2000);
                 }
             }
             function cargaGGp(id) {
@@ -282,26 +282,28 @@ $idus = null;
             }
             ;
         </script>
-        <div class="row p-2 badge-dark">
-            <div class="btn-toolbar col-xl-11 col-lg-11 col-sm-11 col-xs-11" role="toolbar" aria-label="Toolbar with button groups">
-                <div class="btn-group row" role="group" aria-label="First group">
-                    <form  class="col-5" name="formulario" action="usuario_vista" method="GET">
-                        {!! csrf_field(); !!}
-                        <input class="btn btn-info" type="submit" id="usuario_vista" name="" value="Tus Gastos">
-                    </form>
-                    <?php if ($tus == "administrador") { ?> 
-                        <form  class="col-6 ml-1" name="formulario" action="administracion_vista" method="POST">
-                            {!! csrf_field(); !!}
-                            <input class="btn btn-info" type="submit" id="adminbtn" name="adminbtn" value="Administración">
-                        </form>  
-                    <?php } ?>
+        <div class="header header-expand">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <a class="navbar-brand" href="usuario_vista">Tus Gastos</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="administracion_vista">Administración<span class="sr-only">(current)</span></a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav">
+                        <li class="nav-item active">
+                            <a class="nav-link btn badge-danger" href="cierra_sesion">Salir<span class="sr-only">(current)</span></a>
+                        </li>
+                    </ul>
                 </div>
-            </div>
-            <div class="btn-toolbar col-xl-1 col-lg-1 col-sm-1 col-xs-1" role="toolbar" aria-label="Toolbar with button groups">
-                <div class="row btn-group" role="group" aria-label="First group">
-                    <form  class="col-12" name="formulario" action="cierra_sesion" method="GET">
-                        <input class="btn btn-danger" type="submit" id="salir" name="salir" value="Salir">
-                    </form>
+            </nav>
+            <div class="row m-1 badge-light">
+                <div class="col-12 border-dark border-top border-bottom border-right border-left text-center">
+                    <p>Espacio para banner</p>
                 </div>
             </div>
         </div>
@@ -334,17 +336,13 @@ $idus = null;
                     </div>
                     <div class="col-lg-1 col-md-0 col-0"></div>
                 </div>
-                <div id="accordion1" class="mt-4">
+                <div id="accordion1" class="mt-4 pl-lg-5 pr-lg-5">
                     <div class="card">
-                        <div class="card-header badge-dark" id="headingOne">
-                            <h5 class="mb-0">
-                                <button class="btn btn-toolbar collapsed badge-dark" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                    Usuarios
-                                </button>
-                            </h5>
+                        <div class=" text-center card-header btn btn-outline-light badge-dark" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                            Gastos de usuario
                         </div>
                         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion1">
-                            <div class="card-body">
+                            <div class="card-body" style="background-color: lightslategray">
                                 <div class="row mt-4">
                                     <div class="col-lg-4"></div>
                                     <div class="col-lg-4">
@@ -398,17 +396,13 @@ $idus = null;
                         </div>
                     </div>
                 </div>
-                <div id="accordion2" class="mb-4">
+                <div id="accordion2" class="mb-4 pl-lg-5 pr-lg-5">
                     <div class="card">
-                        <div class="card-header badge-dark" id="headingTwo">
-                            <h5 class="mb-0">
-                                <button class="btn btn-toolbar collapsed badge-dark" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                    Grupos de gasto
-                                </button>
-                            </h5>
+                        <div class=" text-center card-header btn btn-outline-light badge-dark" id="headingTwo" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Grupos de gasto  
                         </div>
                         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion2">
-                            <div class="card-body">
+                            <div class="card-body" style="background-color: lightslategray">
                                 <div class="row mt-4 mb-4">
                                     <div class="col-lg-1"></div>
                                     <div class="col-lg-5 col-md-12 col-sm-12">
@@ -451,7 +445,7 @@ $idus = null;
                 </div>
             </div>
         </div>
-        <div>@include('footer')</div>
+        <div class="row mt-4"><div class="col-12">@include('footer')</div></div>
         <!-- The Modal -->
         <div class="modal" id="myModalWarning">
             <div class="modal-dialog">

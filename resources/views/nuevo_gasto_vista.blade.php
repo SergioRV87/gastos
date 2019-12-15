@@ -70,26 +70,30 @@ $idus = null;
         ?>
     </head>
     <body class="container-fluid" style="background-color: #8bacc1">
-        <div class="row p-2 badge-dark">
-            <div class="btn-toolbar col-xl-11 col-lg-11 col-sm-11 col-xs-11" role="toolbar" aria-label="Toolbar with button groups">
-                <div class="btn-group row" role="group" aria-label="First group">
-                    <form  class="col-5" name="formulario" action="usuario_vista" method="GET">
-                        {!! csrf_field(); !!}
-                        <input class="btn btn-info" type="submit" id="usuario_vista" name="" value="Tus Gastos">
-                    </form>
-                    <?php if ($tus == "administrador") { ?> 
-                        <form  class="col-6 ml-1" name="formulario" action="administracion_vista" method="POST">
-                            {!! csrf_field(); !!}
-                            <input class="btn btn-info" type="submit" id="adminbtn" name="adminbtn" value="Administración">
-                        </form>  
+        <div class="header header-expand">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <a class="navbar-brand" href="usuario_vista">Tus Gastos</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <?php if ($tus == "administrador") { ?>
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="administracion_vista">Administración<span class="sr-only">(current)</span></a>
+                            </li>
+                        </ul>
                     <?php } ?>
+                    <ul class="navbar-nav">
+                        <li class="nav-item active">
+                            <a class="nav-link btn badge-danger" href="cierra_sesion">Salir<span class="sr-only">(current)</span></a>
+                        </li>
+                    </ul>
                 </div>
-            </div>
-            <div class="btn-toolbar col-xl-1 col-lg-1 col-sm-1 col-xs-1" role="toolbar" aria-label="Toolbar with button groups">
-                <div class="row btn-group" role="group" aria-label="First group">
-                    <form  class="col-12" name="formulario" action="cierra_sesion" method="GET">
-                        <input class="btn btn-danger" type="submit" id="salir" name="salir" value="Salir">
-                    </form>
+            </nav>
+            <div class="row m-1 badge-light">
+                <div class="col-12 border-dark border-top border-bottom border-right border-left text-center">
+                    <p>Espacio para banner</p>
                 </div>
             </div>
         </div>
@@ -203,6 +207,6 @@ $idus = null;
                 </div>
             </div>
         </div>
-        <div class="mt-5"> @include('footer')</div>
+        <div class="row mt-4"><div class="col-12">@include('footer')</div></div>
     </body>
 </html>
