@@ -25,7 +25,7 @@ Route::get('nuevo_gasto_vista', function () {
 Route::post('administracion_vista', 'administracion_controller@show');
 Route::post('nuevo_gasto_apertura', 'nuevo_gasto_controller@show');
 Route::post('nuevo_gasto_guardado', 'nuevo_gasto_controller@nuevo_gasto_guardado');
-Route::post('cierra_sesion', 'usuario_controller@logoff');
+Route::get('cierra_sesion', 'usuario_controller@logoff');
 //Fin rutas de Sergio
 //Rutas de Bea
 Route::get('/', function () {
