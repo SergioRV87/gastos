@@ -467,7 +467,7 @@ $idus = null;
                 <div class="modal-content">
                     <!-- Modal Header -->
                     <div class="modal-header badge-success">
-                        <h4 class="modal-title">Correcto</h4>
+                        <h4 class="modal-title">Información</h4>
                     </div>
                     <!-- Modal body -->
                     <div class="modal-body badge-success">
