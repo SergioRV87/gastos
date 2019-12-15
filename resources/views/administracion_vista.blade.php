@@ -185,6 +185,7 @@ $idus = null;
                             if (response == "vacio")
                             {
                                 var tabla = '<h3>Sin gastos..</h3>';
+                                document.getElementById("lbllistagp").innerHTML ="";
                                 document.getElementById("listaGp").innerHTML = tabla;
                                 document.getElementById("detalleGp").innerHTML = "<h3>Seleccione un gasto de usuario...</h3>";
                             }
@@ -195,6 +196,7 @@ $idus = null;
                                 var imprimir = JSON.parse(response);
                                 $contenidoGp = imprimir;
                                 var tabla = '';
+                                $ptotal=0;
                                 for ($i = 0; $i < imprimir.length; $i++)
                                 {   //id,idus,descripcion,fecha,tipo,cuantia,km
                                     if (imprimir[$i].tipo == 1 || imprimir[$i].tipo == 3) {
@@ -206,7 +208,7 @@ $idus = null;
                                     }
                                 }
 
-                                document.getElementById("lbllistagp").innerHTML = '<div class="row mb-4"><div class="col-12 text-center"><button class="form control">Coste total: ' + $ptotal + ' €</button></div></div>';
+                                document.getElementById("lbllistagp").innerHTML = '<div class="row mb-4"><div class="col-12 text-center"><button class="form control">Coste total: ' + $ptotal + ' € | Precio por Km: '+imprimir[0].pkm+'</button></div></div>';
                                 document.getElementById("listaGp").innerHTML = tabla;
                             }
                         }
@@ -214,6 +216,7 @@ $idus = null;
                 } else {
 
                     var tabla = '<h3>Sin gastos...</h3>';
+                    document.getElementById("lbllistagp").innerHTML ="";
                     document.getElementById("listaGp").innerHTML = tabla;
                     document.getElementById("detalleGp").innerHTML = "<h3>Seleccione un gasto de usuario...</h3>";
                 }
@@ -372,7 +375,7 @@ $idus = null;
                                                 </h5>
                                             </div>
                                             <div id="lista" name="lista" class="smenuu card-body">
-                                                <h3>Cargando....</h3>
+                                                <h3>Sin gastos..</h3>
                                             </div>
                                         </div>
                                     </div>
@@ -417,7 +420,7 @@ $idus = null;
                                             <div class="smenuu card-body">
                                                 <div id="lbllistagp"></div>
                                                 <div id="listaGp" name="listaGp">
-                                                    <h3>Cargando....</h3>
+                                                    <h3>Seleccione un grupo</h3>
                                                 </div>
                                             </div>
 
