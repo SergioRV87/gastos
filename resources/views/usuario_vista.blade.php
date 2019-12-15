@@ -69,7 +69,7 @@ $idus = null;
                 for ($i = 0; $i < $contenido.length; $i++) {
                     if ($contenido[$i].id == id) {
                         if ($contenido[$i].tipo == 1 || $contenido[$i].tipo == 3) {
-                            tabla = '<div class="row"><div class="col-12"><label>Fecha:' + $contenido[$i].fecha + '</label></div></div><div class="row"><div class="col-12"><label>Tipo:' + tipo($contenido[$i].tipo) + '</label></div></div><div class="row"><div class="col-12"><label>Cuantia:' + $contenido[$i].cuantia + '€</label></div></div><div class="row"><div class="col-12"><label>' + $contenido[$i].descripcion + '</label></div></div><div class="row"><div class="col-12"><image src="gimg/-' + $contenido[$i].id + '.jpg"></div></div></div>';
+                            tabla = '<div class="row"><div class="col-12"><label>Fecha:' + $contenido[$i].fecha + '</label></div></div><div class="row"><div class="col-12"><label>Tipo:' + tipo($contenido[$i].tipo) + '</label></div></div><div class="row"><div class="col-12"><label>Cuantia:' + $contenido[$i].cuantia + '€</label></div></div><div class="row"><div class="col-12"><label>' + $contenido[$i].descripcion + '</label></div></div><div class="row"><div class="col-12"><image src="gimg/-' + $contenido[$i].id + '.jpg" class="img-responsive" style="max-width:50%;"></div></div></div>';
                         } else {
                             tabla = '<div class="row"><div class="col-12"><label>Fecha:' + $contenido[$i].fecha + '</label></div></div><div class="row"><div class="col-12"><label>Tipo:' + tipo($contenido[$i].tipo) + '</label></div></div><div class="row"><div class="col-12"><label>KM:' + $contenido[$i].cuantia + '</label></div></div><div class="row"><div class="col-12"><label>' + $contenido[$i].descripcion + '</label></div></div></div>';
                         }
@@ -127,7 +127,10 @@ $idus = null;
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item active">
-                                <a class="nav-link" href="administracion_vista">Administración<span class="sr-only">(current)</span></a>
+                                <form name="formulario" action="administracion_vista" method="POST">
+                                    {!! csrf_field(); !!}
+                                    <input class="form-control btn-dark" type="submit" id="adm" name="adm" value="Administración">
+                                </form> 
                             </li>
                         </ul>
                     <?php } else {

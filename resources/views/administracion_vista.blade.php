@@ -252,7 +252,7 @@ $idus = null;
                     if ($contenidoGp[$i].id == id) {
                         if ($contenidoGp[$i].tipo == 1 || $contenidoGp[$i].tipo == 3) {
                             tabla = '<div class="row"><div class="col-8 text-right"><label>Fecha:' + $contenidoGp[$i].fecha + '</label></div><div class="col-4"><button class="btn btn-dark" onclick="borraDeGp(' + $contenidoGp[$i].id + ',' + $contenidoGp[$i].idg + ')">X</button></div></div>\n\
-                            <div class="row"><div class="col-12"><label>Tipo:' + tipo($contenidoGp[$i].tipo) + '</label></div></div><div class="row"><div class="col-12"><label>Cuantia:' + $contenidoGp[$i].cuantia + '€</label></div></div><div class="row"><div class="col-12"><label>Descripcion:' + $contenidoGp[$i].descripcion + '</label></div></div><div class="row"><div class="col-12"><image src="gimg/-' + $contenidoGp[$i].id + '.jpg" class="img-responsive"></div></div></div>';
+                            <div class="row"><div class="col-12"><label>Tipo:' + tipo($contenidoGp[$i].tipo) + '</label></div></div><div class="row"><div class="col-12"><label>Cuantia:' + $contenidoGp[$i].cuantia + '€</label></div></div><div class="row"><div class="col-12"><label>Descripcion:' + $contenidoGp[$i].descripcion + '</label></div></div><div class="row"><div class="col-12"><image src="gimg/-' + $contenidoGp[$i].id + '.jpg" class="img-responsive" style="max-width:50%;"></div></div></div>';
                         } else {
                             tabla = '<div class="row"><div class="col-8 text-right"><label>Fecha:' + $contenidoGp[$i].fecha + '</label></div><div class="col-4"><button class="btn btn-dark" onclick="borraDeGp(' + $contenidoGp[$i].id + ',' + $contenidoGp[$i].idg + ')">X</button></div></div>\n\
                             <div class="row"><div class="col-12"><label>Tipo:' + tipo($contenidoGp[$i].tipo) + '</label></div></div><div class="row"><div class="col-12"><label>KM:' + $contenidoGp[$i].cuantia + '</label></div></div><div class="row"><div class="col-12"><label>Descripcion:' + $contenidoGp[$i].descripcion + '</label></div></div></div>';
@@ -292,7 +292,6 @@ $idus = null;
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="administracion_vista">Administración<span class="sr-only">(current)</span></a>
                         </li>
                     </ul>
                     <ul class="navbar-nav">
