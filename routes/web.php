@@ -16,13 +16,16 @@
   }); */
 //Rutas de Sergio
 Route::get('usuario_vista', function () {
-    return view('usuario_vista');
-});
+    return view('usuario_vista');  
+})->middleware('usuario');
 Route::get('nuevo_gasto_vista', function () {
     return view('nuevo_gasto_vista');
 });
 //Route::get('/', 'usuario_controller@show');
-Route::get('administracion_vista', 'administracion_controller@show');
+Route::get('administracion_vista', function () {
+    return view('administracion_vista');  
+})->middleware('esAdmin');
+Route::post('administracion_vista', 'administracion_controller@show');
 Route::post('nuevo_gasto_apertura', 'nuevo_gasto_controller@show');
 Route::post('nuevo_gasto_guardado', 'nuevo_gasto_controller@nuevo_gasto_guardado');
 Route::get('cierra_sesion', 'usuario_controller@logoff');

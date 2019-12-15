@@ -88,7 +88,6 @@ class nuevo_gasto_controller extends Controller
                 move_uploaded_file($_FILES['fichero_usuario']['tmp_name'], $fichero_subido);
 
             }
-            $msg='Usuario registrado.';
         }
         return view('usuario_vista');
     }

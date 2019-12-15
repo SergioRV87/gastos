@@ -185,6 +185,7 @@ $idus = null;
                             if (response == "vacio")
                             {
                                 var tabla = '<h3>Sin gastos..</h3>';
+                                document.getElementById("lbllistagp").innerHTML ="";
                                 document.getElementById("listaGp").innerHTML = tabla;
                                 document.getElementById("detalleGp").innerHTML = "<h3>Seleccione un gasto de usuario...</h3>";
                             }
@@ -195,6 +196,7 @@ $idus = null;
                                 var imprimir = JSON.parse(response);
                                 $contenidoGp = imprimir;
                                 var tabla = '';
+                                $ptotal=0;
                                 for ($i = 0; $i < imprimir.length; $i++)
                                 {   //id,idus,descripcion,fecha,tipo,cuantia,km
                                     if (imprimir[$i].tipo == 1 || imprimir[$i].tipo == 3) {
@@ -206,7 +208,7 @@ $idus = null;
                                     }
                                 }
 
-                                document.getElementById("lbllistagp").innerHTML = '<div class="row mb-4"><div class="col-12 text-center"><button class="form control">Coste total: ' + $ptotal + ' €</button></div></div>';
+                                document.getElementById("lbllistagp").innerHTML = '<div class="row mb-4"><div class="col-12 text-center"><button class="form control">Coste total: ' + $ptotal + ' € | Precio por Km: '+imprimir[0].pkm+'</button></div></div>';
                                 document.getElementById("listaGp").innerHTML = tabla;
                             }
                         }
@@ -214,6 +216,7 @@ $idus = null;
                 } else {
 
                     var tabla = '<h3>Sin gastos...</h3>';
+                    document.getElementById("lbllistagp").innerHTML ="";
                     document.getElementById("listaGp").innerHTML = tabla;
                     document.getElementById("detalleGp").innerHTML = "<h3>Seleccione un gasto de usuario...</h3>";
                 }
@@ -252,7 +255,7 @@ $idus = null;
                     if ($contenidoGp[$i].id == id) {
                         if ($contenidoGp[$i].tipo == 1 || $contenidoGp[$i].tipo == 3) {
                             tabla = '<div class="row"><div class="col-8 text-right"><label>Fecha:' + $contenidoGp[$i].fecha + '</label></div><div class="col-4"><button class="btn btn-dark" onclick="borraDeGp(' + $contenidoGp[$i].id + ',' + $contenidoGp[$i].idg + ')">X</button></div></div>\n\
-                            <div class="row"><div class="col-12"><label>Tipo:' + tipo($contenidoGp[$i].tipo) + '</label></div></div><div class="row"><div class="col-12"><label>Cuantia:' + $contenidoGp[$i].cuantia + '€</label></div></div><div class="row"><div class="col-12"><label>Descripcion:' + $contenidoGp[$i].descripcion + '</label></div></div><div class="row"><div class="col-12"><image src="gimg/-' + $contenidoGp[$i].id + '.jpg" class="img-responsive"></div></div></div>';
+                            <div class="row"><div class="col-12"><label>Tipo:' + tipo($contenidoGp[$i].tipo) + '</label></div></div><div class="row"><div class="col-12"><label>Cuantia:' + $contenidoGp[$i].cuantia + '€</label></div></div><div class="row"><div class="col-12"><label>Descripcion:' + $contenidoGp[$i].descripcion + '</label></div></div><div class="row"><div class="col-12"><image src="gimg/-' + $contenidoGp[$i].id + '.jpg" class="img-responsive" style="max-width:50%;"></div></div></div>';
                         } else {
                             tabla = '<div class="row"><div class="col-8 text-right"><label>Fecha:' + $contenidoGp[$i].fecha + '</label></div><div class="col-4"><button class="btn btn-dark" onclick="borraDeGp(' + $contenidoGp[$i].id + ',' + $contenidoGp[$i].idg + ')">X</button></div></div>\n\
                             <div class="row"><div class="col-12"><label>Tipo:' + tipo($contenidoGp[$i].tipo) + '</label></div></div><div class="row"><div class="col-12"><label>KM:' + $contenidoGp[$i].cuantia + '</label></div></div><div class="row"><div class="col-12"><label>Descripcion:' + $contenidoGp[$i].descripcion + '</label></div></div></div>';
@@ -271,6 +274,7 @@ $idus = null;
                     url: 'ajax/borraDeGP.php',
                     type: 'post',
                     success: function (response) {
+                        alert(response);
                         //Si en response viene la cadena vacio es que no hay nada en la  base de datos.
                         if (response == "ok")
                         {
@@ -291,7 +295,6 @@ $idus = null;
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="administracion_vista">Administración<span class="sr-only">(current)</span></a>
                         </li>
                     </ul>
                     <ul class="navbar-nav">
@@ -372,7 +375,7 @@ $idus = null;
                                                 </h5>
                                             </div>
                                             <div id="lista" name="lista" class="smenuu card-body">
-                                                <h3>Cargando....</h3>
+                                                <h3>Sin gastos..</h3>
                                             </div>
                                         </div>
                                     </div>
@@ -417,7 +420,7 @@ $idus = null;
                                             <div class="smenuu card-body">
                                                 <div id="lbllistagp"></div>
                                                 <div id="listaGp" name="listaGp">
-                                                    <h3>Cargando....</h3>
+                                                    <h3>Seleccione un grupo</h3>
                                                 </div>
                                             </div>
 
