@@ -5,12 +5,11 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="{{asset('css/bootstrap.css')}}" rel="stylesheet">
+        <link href="{{asset('css/estilos.css')}}" rel="stylesheet">
         <script type="text/javascript" src="{{ URL::asset('js/jquery-2.1.4.js') }}"></script> 
         <script src="{{asset('js/bootstrap.js')}}" type="text/javascript"></script>
         <script src="{{asset('js/validacionLogin.js')}}" type="text/javascript"></script>
-        <link href="{{asset('css/bootstrap.css')}}" rel="stylesheet">
-        <link href="{{asset('css/estilos.css')}}" rel="stylesheet">
-
     </head>
     <body class="container-fluid badge-dark">
         <div class="row mt-5">
@@ -27,7 +26,7 @@
                         </div>
                         <div class="row mt-5">
                             <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3"></div>
-                            <input type="submit" id="login" class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 btn btn-dark" value="Aceptar">
+                            <input type="submit" id="login" class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 btn" value="Aceptar">
                             <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3"></div>
                         </div>
                     </div>
