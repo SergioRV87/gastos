@@ -37,6 +37,7 @@
             function cargarUsuario()
             {
                 $idussel=document.getElementById("selusr").value;
+                //alert($idussel);
                 if($idussel!=-1){
                     $.ajax({
                     data:{"usuario":$idussel},
@@ -198,7 +199,6 @@
                 $idg = id;
                 $gp = document.getElementById("selgp").value;
                 if($gp!="-1" && $gp!=null){
-                    
                     $.ajax({
                         data:{"idgasto":$idg,"idgp":$gp},
                         url: 'ajax/aniadeAGrupo.php',
@@ -238,6 +238,7 @@
                     url: 'ajax/borraDeGP.php',
                     type: 'post',
                     success: function (response) {
+                        alert(response);
                         //Si en response viene la cadena vacio es que no hay nada en la  base de datos.
                         if(response=="ok")
                         {
@@ -325,7 +326,7 @@
                     <label for="ngp">Crear grupo: Denominacion</label>
                     <input type="text" name="ngp" id="ngp">
                     <label for="pkm">Precio por km</label>
-                    <input type="number" name="pkm" id="pkm">
+                    <input type="number" name="pkm" step="any" id="pkm">
                     <input type="button" onclick="aniadeGP()" value="Añadir" class="boton">
                 </div>
             </div>

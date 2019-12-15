@@ -115,7 +115,7 @@
                         </div>
                         <div class="col-4">
                             <label for="cuantia" id="cuantia_l">Cuantia.</label>
-                            <input class="form-control" type="number" id="cuantia" name="cuantia" min="1" value="1">
+                            <input class="form-control" type="number" step="any" id="cuantia" name="cuantia" min="1" value="1">
                         </div>
                     </div>
                     <div class="row">

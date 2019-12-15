@@ -57,5 +57,7 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'esAdmin' => \App\Http\Middleware\esAdmin::class,
+        'usuario' => \App\Http\Middleware\usuario::class,
     ];
 }

@@ -34,7 +34,7 @@
             function cargarInicio()
             {
                 $.ajax({
-                    data:{"usuario":"<?php echo$idus ?>"},
+                    data:{"usuario":"<?php echo $idus ?>"},
                     url: 'ajax/cargaGastosUsuario.php',
                     type: 'post',
                     success: function (response) {
@@ -90,6 +90,27 @@
                 }
                 return ret;
             }
+            function borraGasto(id){
+                $.ajax({
+                    data:{"id":id},
+                    url: 'ajax/borraGasto.php',
+                    type: 'post',
+                    success: function (response) {
+                        //Si en response viene la cadena vacio es que no hay nada en la  base de datos.
+                        alert(response);
+                        if(response==="no")
+                        {
+                            alert("El gasto ya fue agrupado por algun administrador, contacte con los administradores para poder borrarlo.");
+                        }
+                        //Si hay resultados se pintan
+                        else
+                        {
+                            cargarInicio();
+                            document.getElementById("detalle").innerHTML= "<label>Selecciona un gasto para verlo en detalle</label>";
+                        }
+                    } 
+                });
+            };
         </script>
         <div class="container-fluid">
             <!--Titulo-->
